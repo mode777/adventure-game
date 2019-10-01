@@ -4,6 +4,7 @@ let ctx;
 let canvas;
 
 let tileImages = [];
+let playerImage;
 const TILE_W = 100;
 const TILE_H = 82;
 const OFFSET_X = 60;
@@ -21,6 +22,7 @@ export async function loadAssets() {
   tileImages[game.WATER] = await loadImage('assets/Water Alt.png');
   tileImages[game.GOAL] = await loadImage('assets/Selector Alt.png');
   tileImages[game.STONE] = await loadImage('assets/Stone Block Alt.png');
+  tileImages[game.PLAYER] = await loadImage('assets/Character Boy Alt.png');
 }
 
 export function clear(){
@@ -29,13 +31,18 @@ export function clear(){
 }
 
 export function drawPlayfield(){
-  const playfield = game.getPlayfield();
+  const ground = game.getGround();
+  const objects = game.getObjects();
+  const chars = game.getCharacters();
 
-  for (let y = 0; y < playfield.length; y++) {
-    const row = playfield[y];
-    for (let x = 0; x < row.length; x++) {
-      const tile = row[x];
-      drawTile(tileImages[tile], x, y);
+  for (let y = 0; y < ground.height; y++) {
+    for (let x = 0; x < ground.width; x++) {
+      const groundTile = ground.get(x,y);
+      drawTile(tileImages[groundTile], x, y);
+
+      const charTile = chars.get(x,y);
+      if(charTile !== null)
+        drawTile(tileImages[charTile], x,y); 
     }
   }
 }
@@ -61,20 +68,48 @@ function getGameCoordinates(x, y){
 export function getContext(){
   return ctx;
 }
-let editorTile = 0;
+let editorTile = 1;
 
 export function enableEditor() {
-  canvas.onclick = e => handleClick(e.offsetX, e.offsetY);
-  canvas.onwheel = e => handleWheel(e.deltaY < 0);
+  canvas.addEventListener('click', e => handleClick(e.offsetX, e.offsetY));
+  window.addEventListener('keyup', e => handleKey(e.key));
 }
 
 function handleClick(x, y) {
   const [gx, gy] = getGameCoordinates(x, y);
-  game.setTile(gx, gy, editorTile);
+  const g = game.getGround();
+  
+  if(g.isInside(gx,gy))
+    g.set(gx, gy, editorTile);
 }
 
-function handleWheel(isUp) {
-  editorTile = Math.abs((editorTile + (isUp ? -1 : 1))) % game.TILE_TYPES;
+function handleKey(key) {
+  console.log(key)
+  switch (key) {
+    case '1':
+      editorTile = game.FLOOR;
+      break;
+    case '2':
+      editorTile = game.WALL;
+      break;
+      case '3':
+        editorTile = game.WATER;
+      break;
+    case 'y':
+      const name = prompt('Enter map name', 'map');
+      window.localStorage.setItem(name + '.ground', JSON.stringify(game.getGround().data));
+      window.localStorage.setItem(name + '.objects', JSON.stringify(game.getObjects().data));
+      window.localStorage.setItem(name + '.characters', JSON.stringify(game.getCharacters().data));
+      break;
+    case 'x':
+      const loadname = prompt('Enter map name', 'map');
+      game.getGround().data = JSON.parse(window.localStorage.getItem(loadname + '.ground'));
+      game.getObjects().data = JSON.parse(window.localStorage.getItem(loadname + '.objects'));
+      game.getCharacters().data = JSON.parse(window.localStorage.getItem(loadname + '.characters'));
+      break;
+    default:
+      break;
+  }
 }
 
 export function drawEditorControls() {

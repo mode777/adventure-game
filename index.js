@@ -5,6 +5,7 @@ main();
 
 async function main() {
   game.initPlayfield();
+  game.initControls();
   
   await renderer.loadAssets();  
   renderer.initRenderer();
