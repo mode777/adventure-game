@@ -8,6 +8,8 @@ export enum TaskState {
 
 export class Task {
 
+  public static completed = new Task(t => true);
+
   public static wait(ms: number){
     return new Task(time => {
       ms -= time;

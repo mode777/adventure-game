@@ -1,5 +1,10 @@
 import { ResourceLoader } from './resource-loader';
 
+const TILE_W = 100;
+const TILE_H = 82;
+const OFFSET_X = 60;
+const OFFSET_Y = 0;
+
 export class Renderer {
 
   private ctx: CanvasRenderingContext2D;
@@ -15,5 +20,9 @@ export class Renderer {
 
   drawImage(image: HTMLImageElement, x: number, y: number) {
     this.ctx.drawImage(image, x, y);
+  }
+
+  drawTile(image: HTMLImageElement, x: number, y: number, ox: number, oy: number) {
+    this.drawImage(image, OFFSET_X + ox + (x * TILE_W), OFFSET_Y + oy + (y * TILE_H));
   }
 }
