@@ -5,6 +5,6 @@ export class Playfield<T> {
   }
 
   get(x: number, y: number){
-    return this.data[]
+    return this.data[0]
   }
 }
