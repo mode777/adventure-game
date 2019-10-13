@@ -7,9 +7,19 @@ const OFFSET_Y = 0;
 
 export class Renderer {
 
+  private static singleton : Renderer;
+  
+  public static get instance(){
+    return Renderer.singleton;
+  }
+
+  public static init(canvas: HTMLCanvasElement){
+    Renderer.singleton = new Renderer(canvas);
+  }
+
   private ctx: CanvasRenderingContext2D;
 
-  constructor(private canvas: HTMLCanvasElement) {
+  private constructor(private canvas: HTMLCanvasElement) {
     this.ctx = this.canvas.getContext('2d');
   }
 
