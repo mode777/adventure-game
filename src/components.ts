@@ -6,13 +6,13 @@ export enum ComponentKey {
   ground = 1 << 4,
 }
 
-export class Entity {
+export class Entity implements IEntity {
 
   key: ComponentKey = 0;
   
   constructor(public readonly id: number, private data: any){
     Object.assign(this, data);
-    
+
     for (const strVal in ComponentKey) {
       if(data[strVal]){
         this.key += <ComponentKey><unknown>ComponentKey[strVal];
@@ -20,21 +20,22 @@ export class Entity {
     }
   }
 
-  component<T>(key: ComponentKey){
-    return this.data[ComponentKey[key]];
-  }  
+  hasKey(key: number){
+    return (key & this.key) > 0;
+  }
 }
 
-export abstract class System {
-  constructor(private key: ComponentKey){
+export interface IEntity {
+  id: number
+}
 
+export interface HasPosition extends IEntity {
+  position: {
+    x: number,
+    y: number
   }
-  
-  update(entity: Entity){
-    if((entity.key & this.key) > 0){
-      this.updateEntity(entity);
-    }
-  }
+}
 
-  abstract updateEntity(entity: Entity);
+export interface System {
+  update(time: number);
 }
