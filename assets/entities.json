@@ -1,11 +1,11 @@
 {
   "blueprints": {
     "g_floor": {
-      "image": { "path": "assets/Plain Block.png" },
+      "image": "assets/Plain Block.png",
       "ground": { "passable": true }
     },
     "g_wall": {
-      "image": { "path": "assets/Wall Block Alt.png" },
+      "image": "assets/Wall Block Alt.png",
       "ground": { "passable": false }
     } 
   },

@@ -36,6 +36,10 @@ export interface HasPosition extends IEntity {
   }
 }
 
+export interface HasImage extends IEntity {
+  image: string
+}
+
 export interface System {
-  update(time: number);
+  update(time: number): Promise<void> | void;
 }
