@@ -1,9 +1,23 @@
 import { Entity, IEntity } from './components';
+import {injectable, inject, singleton} from "tsyringe";
 
+export const ENTITY_OPTIONS = 'entity_options';
+
+export interface EntityRepoOptions {
+  entities?: Entity[];
+}
+
+@singleton()
 export class EntityRepository {
  
   entities = new Map<number, Entity>();
   tags = new Map<string, Set<Entity>>();
+
+  constructor(@inject(ENTITY_OPTIONS) options: EntityRepoOptions){
+    for (const entity of options.entities || []) {
+      this.addEntity(entity);
+    }
+  }
 
   addEntity(entity: Entity){
     this.entities.set(entity.id, entity);

@@ -1,4 +1,4 @@
-import { HasPosition } from './components';
+import { HasPosition } from '../components';
 
 export class SpatialHash {
   

@@ -16,6 +16,8 @@
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
-    "tslib": "^1.10.0"
+    "reflect-metadata": "^0.1.13",
+    "tslib": "^1.10.0",
+    "tsyringe": "^3.4.0"
   }
 }

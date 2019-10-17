@@ -1,25 +1,25 @@
 import { ResourceLoader } from './resource-loader';
+import { injectable, singleton, inject } from 'tsyringe';
 
 const TILE_W = 100;
 const TILE_H = 82;
 const OFFSET_X = 60;
 const OFFSET_Y = 0;
 
+export const RENDERER_OPTIONS = 'renderer_options';
+
+export interface RendererOptions {
+  canvas: HTMLCanvasElement; 
+}
+
+@singleton()
 export class Renderer {
 
-  private static singleton : Renderer;
-  
-  public static get instance(){
-    return Renderer.singleton;
-  }
-
-  public static init(canvas: HTMLCanvasElement){
-    Renderer.singleton = new Renderer(canvas);
-  }
-
   private ctx: CanvasRenderingContext2D;
+  private canvas: HTMLCanvasElement;
 
-  private constructor(private canvas: HTMLCanvasElement) {
+  constructor(@inject(RENDERER_OPTIONS) options: RendererOptions) {
+    this.canvas = options.canvas;
     this.ctx = this.canvas.getContext('2d');
   }
 

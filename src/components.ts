@@ -10,7 +10,7 @@ export class Entity implements IEntity {
 
   key: ComponentKey = 0;
   
-  constructor(public readonly id: number, private data: any){
+  constructor(public readonly id: number, data: any){
     Object.assign(this, data);
 
     for (const strVal in ComponentKey) {
@@ -41,5 +41,6 @@ export interface HasImage extends IEntity {
 }
 
 export interface System {
-  update(time: number): Promise<void> | void;
+  init(): Promise<void>;
+  update(time: number): void;
 }

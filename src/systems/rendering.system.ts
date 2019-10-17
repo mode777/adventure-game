@@ -1,16 +1,21 @@
-import { System, ComponentKey as Key, HasPosition, HasImage } from 'src/components';
-import { EntityRepository } from 'src/entity-repository';
-import { Renderer } from 'src/renderer';
-import { ResourceLoader } from 'src/resource-loader';
+import { System, ComponentKey as Key, HasPosition, HasImage } from '../components';
+import { EntityRepository } from '../entity-repository';
+import { Renderer } from '../renderer';
+import { ResourceLoader } from '../resource-loader';
+import { singleton } from 'tsyringe';
 
+@singleton()
 export class RenderingSystem implements System {
-
+  
   constructor(private renderer: Renderer, 
     private entityRepo: EntityRepository,
     private resources: ResourceLoader){
-
   }
-
+    
+  async init(): Promise<void> {
+    
+  }
+  
   update(time: number) {
     this.renderer.clear();
     for (const entity of this.entityRepo.iterate<HasPosition & HasImage>(Key.image | Key.position)) {
