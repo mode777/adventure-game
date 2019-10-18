@@ -10,7 +10,7 @@ export class ResourceLoaderSystem implements System {
 
   async init(): Promise<void> {
     for (const entity of this.entities.iterate<HasImage>(ComponentKey.image)) {
-      console.log(entity);
+      
       await this.loader.loadImage(entity.image);
     }
   }

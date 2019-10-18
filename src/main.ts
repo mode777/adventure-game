@@ -5,8 +5,18 @@ import { EntityRepoOptions, ENTITY_OPTIONS } from './entity-repository';
 import { SystemManager } from './system-manager';
 import { container } from 'tsyringe';
 import { RendererOptions, RENDERER_OPTIONS } from './renderer';
+import { XmlLoader } from './xml-parser';
 
 (async function main(){
+
+  const xml = new XmlLoader({
+    components: 'config/components.xml',
+    entities: '',
+    prototypes: '',
+    systems: ''
+  });
+
+  await xml.loadXml();
 
   const entities = await loadEntities();
   const canvas =  <HTMLCanvasElement>document.getElementById('canvas');
@@ -35,6 +45,7 @@ import { RendererOptions, RENDERER_OPTIONS } from './renderer';
 
 async function loadEntities() {
   const data = await (await fetch('assets/entities.json')).json();
+  let id = 0;
 
   const entities = data.entities.map(x => {
     if(x['_bp']){
@@ -44,7 +55,7 @@ async function loadEntities() {
       }
     }
     return x;
-  }).map(x => new Entity(0, x));
+  }).map(x => new Entity(++id, x));
 
   return entities;
 }

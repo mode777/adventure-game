@@ -32,7 +32,7 @@ export class EntityRepository {
   }
 
   *iterate<T extends IEntity>(key: number) : IterableIterator<T>{
-    for (const entity of this.entities.values()) {
+    for (const entity of this.entities.values()) {      
       if(entity.hasKey(key)){
         yield <T><unknown>entity;
       }

@@ -1,0 +1,29 @@
+<? xml version="1.0" encoding="UTF-8" ?>
+<prototypes>
+ 
+  <prototype id="floor">
+    <image value="assets/Plain Block.png" />
+    <ground type="passable" />    
+    <position />
+  </prototype>
+ 
+  <prototype id="wall">
+    <image value="assets/Wall Block Alt.png" />
+    <ground type="solid" />
+    <position />
+  </prototype>
+ 
+  <prototype id="water">
+    <image value="assets/Wall Block Alt.png" />
+    <ground type="hole" />
+    <position />
+  </prototype>
+
+  <prototype id="player">
+    <image value="assets/Character Boy Alt.png" />
+    <player />
+    <object />
+    <position />
+  </prototype>
+
+</prototypes>

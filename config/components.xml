@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<components>
+  <component name="image" flag="0" />
+  <component name="ground" flag="1" />
+  <component name="position" flag="2" />
+  <component name="object" flag="3" />
+  <component name="player" flag="4" />
+</components>
