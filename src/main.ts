@@ -11,9 +11,9 @@ import { XmlLoader } from './xml-parser';
 
   const xml = new XmlLoader({
     components: 'config/components.xml',
-    entities: '',
-    prototypes: '',
-    systems: ''
+    entities: 'config/entities.xml',
+    prototypes: 'config/prototypes.xml',
+    systems: 'config/systems.xml'
   });
 
   await xml.loadXml();
