@@ -1,29 +1,9 @@
-export enum ComponentKey {
-  position = 1 << 0,
-  offset = 1 << 1,
-  image = 1 << 2,
-  object = 1 << 3,
-  ground = 1 << 4,
-}
+import { Prototype } from './prototype';
 
-export class Entity implements IEntity {
+export const ComponentKey: {[id: string]: number} = {};
+export const ComponentName: {[id: number]: string} = {};
 
-  key: ComponentKey = 0;
-  
-  constructor(public readonly id: number, data: any){
-    Object.assign(this, data);
-
-    for (const strVal in ComponentKey) {
-      if(data[strVal]){
-        this.key += <ComponentKey><unknown>ComponentKey[strVal];
-      } 
-    }
-  }
-
-  hasKey(key: number){
-    return (key & this.key) > 0;
-  }
-}
+export const Prototypes: {[id: string]: Prototype} = {};
 
 export interface IEntity {
   id: number

@@ -1,4 +1,4 @@
-import { System, HasImage, Entity, ComponentKey } from '../components';
+import { System, HasImage, ComponentKey } from '../components';
 import { ResourceLoader } from '../resource-loader';
 import { EntityRepository } from '../entity-repository';
 import { singleton } from 'tsyringe';
@@ -15,6 +15,6 @@ export class ResourceLoaderSystem implements System {
     }
   }
   
-  async update(time: number) {}
+  update(time: number) {}
 
 }

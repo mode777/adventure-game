@@ -1,5 +1,6 @@
-import { Entity, IEntity } from './components';
+import { IEntity } from './components';
 import {injectable, inject, singleton} from "tsyringe";
+import { Entity } from './entity';
 
 export const ENTITY_OPTIONS = 'entity_options';
 

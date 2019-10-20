@@ -1,22 +1,14 @@
 import 'reflect-metadata';
 
-import { Entity } from './components';
 import { EntityRepoOptions, ENTITY_OPTIONS } from './entity-repository';
 import { SystemManager } from './system-manager';
 import { container } from 'tsyringe';
 import { RendererOptions, RENDERER_OPTIONS } from './renderer';
-import { XmlLoader } from './xml-parser';
+import { XmlLoader } from './xml-loader';
 
 (async function main(){
 
-  const xml = new XmlLoader({
-    components: 'config/components.xml',
-    entities: 'config/entities.xml',
-    prototypes: 'config/prototypes.xml',
-    systems: 'config/systems.xml'
-  });
 
-  await xml.loadXml();
 
   const entities = await loadEntities();
   const canvas =  <HTMLCanvasElement>document.getElementById('canvas');
@@ -44,18 +36,12 @@ import { XmlLoader } from './xml-parser';
 })();
 
 async function loadEntities() {
-  const data = await (await fetch('assets/entities.json')).json();
-  let id = 0;
+  const xml = new XmlLoader({
+    components: 'config/components.xml',
+    entities: 'config/entities.xml',
+    prototypes: 'config/prototypes.xml',
+    systems: 'config/systems.xml'
+  });
 
-  const entities = data.entities.map(x => {
-    if(x['_bp']){
-      return {
-        ...data.blueprints[x['_bp']],
-        ...x
-      }
-    }
-    return x;
-  }).map(x => new Entity(++id, x));
-
-  return entities;
+  return await xml.loadEntities();
 }
