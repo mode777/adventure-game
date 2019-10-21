@@ -20,4 +20,9 @@ export class Entity implements IEntity {
   hasKey(key: number){
     return (key & this.key) === key;
   }
+
+  addComponent(name: string, data: any){
+    this.key |= ComponentKey[name];
+    this[name] = data;
+  }
 }

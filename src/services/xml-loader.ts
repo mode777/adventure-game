@@ -1,6 +1,6 @@
-import { ComponentKey, ComponentName, Prototypes } from './components';
-import { Prototype } from './prototype';
-import { Entity } from './entity';
+import { ComponentKey, ComponentName, Prototypes } from '../components';
+import { Prototype } from '../prototype';
+import { Entity } from '../entity';
 
 export interface XmlOptions {
   components: string,

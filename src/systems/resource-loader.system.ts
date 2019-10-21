@@ -1,12 +1,12 @@
 import { System, HasImage, ComponentKey } from '../components';
-import { ResourceLoader } from '../resource-loader';
-import { EntityRepository } from '../entity-repository';
+import { ResourceLoader } from '../services/resource-loader';
+import { EntityManager } from '../services/entity-manager';
 import { singleton } from 'tsyringe';
 
 @singleton()
 export class ResourceLoaderSystem implements System {
   
-  constructor(private loader: ResourceLoader, private entities: EntityRepository){}
+  constructor(private loader: ResourceLoader, private entities: EntityManager){}
 
   async init(): Promise<void> {
     for (const entity of this.entities.iterate<HasImage>(ComponentKey.image)) {

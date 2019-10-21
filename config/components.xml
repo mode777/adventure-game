@@ -5,4 +5,5 @@
   <component name="position" flag="2" />
   <component name="object" flag="3" />
   <component name="player" flag="4" />
+  <component name="direction" flag="5" />
 </components>

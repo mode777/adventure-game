@@ -1,14 +1,12 @@
 import 'reflect-metadata';
 
-import { EntityRepoOptions, ENTITY_OPTIONS } from './entity-repository';
-import { SystemManager } from './system-manager';
+import { EntityRepoOptions, ENTITY_OPTIONS } from './services/entity-manager';
+import { SystemManager } from './services/system-manager';
 import { container } from 'tsyringe';
-import { RendererOptions, RENDERER_OPTIONS } from './renderer';
-import { XmlLoader } from './xml-loader';
+import { RendererOptions, RENDERER_OPTIONS } from './services/renderer';
+import { XmlLoader } from './services/xml-loader';
 
 (async function main(){
-
-
 
   const entities = await loadEntities();
   const canvas =  <HTMLCanvasElement>document.getElementById('canvas');

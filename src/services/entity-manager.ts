@@ -1,6 +1,7 @@
-import { IEntity } from './components';
+import { IEntity } from '../components';
 import {injectable, inject, singleton} from "tsyringe";
-import { Entity } from './entity';
+import { Entity } from '../entity';
+import { EntityIndex } from '../entity-index';
 
 export const ENTITY_OPTIONS = 'entity_options';
 
@@ -9,10 +10,11 @@ export interface EntityRepoOptions {
 }
 
 @singleton()
-export class EntityRepository {
+export class EntityManager {
  
   entities = new Map<number, Entity>();
   tags = new Map<string, Set<Entity>>();
+  indices = new Map<string, EntityIndex<any, any>>();
 
   constructor(@inject(ENTITY_OPTIONS) options: EntityRepoOptions){
     for (const entity of options.entities || []) {
@@ -40,6 +42,24 @@ export class EntityRepository {
     }
   }
 
+  registerIndex(name: string, index: EntityIndex<any, any>){
+    this.indices.set(name, index);
+  }
+
+  indexLookup(index: string, selector: any){
+    return this.indices
+      .get(index)
+      .get(selector);
+  }
+
+  update(){
+    for (const index of this.indices.values()) {
+      index.clear();  
+      for (const entity of this.entities.values()) {
+        index.add(entity);      
+      }
+    }
+  }
 }
 
 // class EntityIterator<T extends IEntity> implements Iterator<T>{

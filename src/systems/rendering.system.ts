@@ -1,14 +1,14 @@
 import { System, ComponentKey as Key, HasPosition, HasImage } from '../components';
-import { EntityRepository } from '../entity-repository';
-import { Renderer } from '../renderer';
-import { ResourceLoader } from '../resource-loader';
+import { EntityManager } from '../services/entity-manager';
+import { Renderer } from '../services/renderer';
+import { ResourceLoader } from '../services/resource-loader';
 import { singleton } from 'tsyringe';
 
 @singleton()
 export class RenderingSystem implements System {
   
   constructor(private renderer: Renderer, 
-    private entityRepo: EntityRepository,
+    private entityRepo: EntityManager,
     private resources: ResourceLoader){
   }
     
