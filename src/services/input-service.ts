@@ -15,11 +15,17 @@ export interface InputState {
 @singleton()
 export class InputService {
 
-  public state: InputState = {};
+  private state: InputState = {};
 
   constructor(){    
-    window.addEventListener('keydown', (e) => this.handleKeyUp(e.key));
+    window.addEventListener('keyup', (e) => this.handleKeyUp(e.key));
     //window.addEventListener('keyup', (e) => this.state = {});
+  }
+
+  public pop(){
+    const s = this.state;
+    this.state = {};
+    return s;
   }
   
   private handleKeyUp(key: string){

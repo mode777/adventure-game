@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { EntityRepoOptions, ENTITY_OPTIONS } from './services/entity-manager';
+import { EntityRepoOptions, ENTITY_OPTIONS, EntityManager } from './services/entity-manager';
 import { SystemManager } from './services/system-manager';
 import { container } from 'tsyringe';
 import { RendererOptions, RENDERER_OPTIONS } from './services/renderer';
@@ -21,10 +21,12 @@ import { XmlLoader } from './services/xml-loader';
   console.log(entities);
 
   const manager = container.resolve(SystemManager);
+  const entityManager = container.resolve(EntityManager);
 
   await manager.init();
 
   function loop(time: number){
+    entityManager.update();
     manager.update(time);
 
     window.requestAnimationFrame(loop);

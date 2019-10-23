@@ -25,4 +25,9 @@ export class Entity implements IEntity {
     this.key |= ComponentKey[name];
     this[name] = data;
   }
+
+  removeComponent(name: string){
+    this.key &= (~ComponentKey[name]);
+    delete this[name];
+  }
 }

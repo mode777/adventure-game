@@ -122,7 +122,8 @@ export class XmlLoader {
       return false;
     } 
     else {
-      return parseFloat(val) || val;
+      const f = parseFloat(val);
+      return isNaN(f) ? val : f;
     }
   }
   

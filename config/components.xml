@@ -6,4 +6,5 @@
   <component name="object" flag="3" />
   <component name="player" flag="4" />
   <component name="direction" flag="5" />
+  <component name="pushable" flag="6" />
 </components>

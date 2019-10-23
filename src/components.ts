@@ -16,6 +16,20 @@ export interface HasPosition extends IEntity {
   }
 }
 
+export interface HasDirection extends IEntity {
+  direction: {
+    x: number,
+    y: number
+  }
+}
+
+
+export interface HasGround extends IEntity {
+  ground: {
+    type: 'passable' | 'solid' | 'hole';
+  }
+}
+
 export interface HasImage extends IEntity {
   image: string
 }

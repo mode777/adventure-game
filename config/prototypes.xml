@@ -22,4 +22,10 @@
     <object />
   </prototype>
 
+  <prototype id="pushable">
+    <image value="assets/Dirt Block Alt.png" />
+    <object />
+    <pushable />
+  </prototype>
+
 </prototypes>

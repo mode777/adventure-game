@@ -16,17 +16,32 @@ export class InputSystem implements System {
   }  
   
   update(time: number): void {
-    if(this.input.state.direction){
-      console.log(this.input.state);
+    const state = this.input.pop();
+
+    if(state.direction !== undefined){
+      
       const player = this.getPlayer();
-      player.addComponent('direction', { 
-        x: (this.input.state === Direction.East) 
-          ? 1
-          : (this.input.state === Direction.West ? -1 : 0),
-        y: (this.input.state === Direction.South) 
-          ? 1
-          : (this.input.state === Direction.North ? -1 : 0)
-      });
+
+      const dir = { x: 0, y: 0 }
+
+      switch (state.direction) {
+        case Direction.East:
+          dir.x++;
+          break;
+        case Direction.North:
+          dir.y--;
+          break;
+        case Direction.South:
+          dir.y++;
+          break;
+        case Direction.West:
+          dir.x--;
+          break;
+        default:
+          break;
+      }
+
+      player.addComponent('direction', dir);
     }
   }
 

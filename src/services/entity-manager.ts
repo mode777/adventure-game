@@ -46,8 +46,8 @@ export class EntityManager {
     this.indices.set(name, index);
   }
 
-  indexLookup(index: string, selector: any){
-    return this.indices
+  indexLookup<T extends IEntity>(index: string, selector: any){
+    return <T>this.indices
       .get(index)
       .get(selector);
   }

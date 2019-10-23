@@ -27,7 +27,7 @@ class SpatialIndex extends EntityIndex<Entity & HasPosition, {x: number, y: numb
 export class PlayfieldSystem implements System {
   
   private floor = new SpatialIndex(x => x.hasKey(ComponentKey.ground));
-  private objects = new SpatialIndex(x => x.hasKey(ComponentKey.ground));
+  private objects = new SpatialIndex(x => x.hasKey(ComponentKey.object));
 
   constructor(private repo: EntityManager){
 

@@ -21,4 +21,5 @@
   <entity prototype="floor"><position x="1" y="4" /></entity>
 
   <entity prototype="player"><position x="1" y="1" /></entity>
+  <entity prototype="pushable"><position x="1" y="2" /></entity>
 </entities>
