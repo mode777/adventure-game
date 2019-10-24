@@ -5,6 +5,11 @@
     <image value="assets/Plain Block.png" />
     <ground type="passable" />    
   </prototype>
+
+  <prototype id="fill">
+    <image value="assets/Dirt Block.png" />
+    <ground type="passable" />    
+  </prototype>
  
   <prototype id="wall">
     <image value="assets/Wall Block Alt.png" />

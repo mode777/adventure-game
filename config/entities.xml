@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <entities>
   <entity prototype="floor"><position x="0" y="0" /></entity>
-  <entity prototype="wall"><position x="1" y="0" /></entity>
+  <entity prototype="floor"><position x="1" y="0" /></entity>
   <entity prototype="floor"><position x="2" y="0" /></entity>
+  <entity prototype="floor"><position x="3" y="0" /></entity>
+  <entity prototype="floor"><position x="4" y="0" /></entity>
+  <entity prototype="floor"><position x="5" y="0" /></entity>
 
   <entity prototype="wall"><position x="0" y="1" /></entity>
-  <entity prototype="floor"><position x="1" y="1" /></entity>
-  <entity prototype="wall"><position x="2" y="1" /></entity>  
+  <entity prototype="wall"><position x="1" y="1" /></entity>
+  <entity prototype="floor"><position x="2" y="1" /></entity>  
+  <entity prototype="wall"><position x="3" y="1" /></entity>  
+  <entity prototype="floor"><position x="4" y="1" /></entity>  
+  <entity prototype="wall"><position x="5" y="1" /></entity>  
 
   <entity prototype="floor"><position x="0" y="2" /></entity>
-  <entity prototype="floor"><position x="1" y="2" /></entity>
+  <entity prototype="water"><position x="1" y="2" /></entity>
   <entity prototype="floor"><position x="2" y="2" /></entity>
+  <entity prototype="floor"><position x="3" y="2" /></entity>
+  <entity prototype="floor"><position x="4" y="2" /></entity>
+  <entity prototype="floor"><position x="5" y="2" /></entity>
 
   <entity prototype="water"><position x="0" y="3" /></entity>
+  <entity prototype="water"><position x="1" y="3" /></entity>
   <entity prototype="water"><position x="2" y="3" /></entity>
-  <entity prototype="floor"><position x="1" y="3" /></entity>
+  <entity prototype="water"><position x="3" y="3" /></entity>
+  <entity prototype="water"><position x="4" y="3" /></entity>
+  <entity prototype="water"><position x="5" y="3" /></entity>
   
   <entity prototype="water"><position x="0" y="4" /></entity>
-  <entity prototype="water"><position x="2" y="4" /></entity>
   <entity prototype="floor"><position x="1" y="4" /></entity>
+  <entity prototype="water"><position x="2" y="4" /></entity>
+  <entity prototype="water"><position x="3" y="4" /></entity>
+  <entity prototype="water"><position x="4" y="4" /></entity>
+  <entity prototype="water"><position x="5" y="4" /></entity>
 
-  <entity prototype="player"><position x="1" y="1" /></entity>
-  <entity prototype="pushable"><position x="1" y="2" /></entity>
+  <entity prototype="player"><position x="0" y="0" /></entity>
+  <entity prototype="pushable"><position x="2" y="1" /></entity>
 </entities>

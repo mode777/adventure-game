@@ -28,19 +28,19 @@ export class PushableSystem implements System {
       };
 
       const obj = this.entities.indexLookup<Entity & HasPosition>('objects', floorPos);
-      const floor = this.entities.indexLookup<HasGround & HasPosition>('floor', neighbourPos);
+      const floor = this.entities.indexLookup<Entity & HasGround & HasPosition>('floor', neighbourPos);
 
-      console.log(obj, floor);
-
-      if(obj && floor && obj.hasKey(ComponentKey.pushable)){
-        if(floor.ground.type === 'solid'){
+      if(obj && obj.hasKey(ComponentKey.pushable)){
+        if(!floor || floor.ground.type === 'solid'){
           player.removeComponent('direction');
         }  
         else if(floor.ground.type === 'passable'){
           obj.position = neighbourPos;
         }
         else if(floor.ground.type === 'hole') {
-          player.removeComponent('direction');          
+          this.entities.createEntity('fill', { position: floor.position });          
+          this.entities.removeEntity(floor);
+          this.entities.removeEntity(obj);
         }
       }      
     }

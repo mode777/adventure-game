@@ -1,7 +1,8 @@
-import { IEntity } from '../components';
+import { IEntity, Prototypes } from '../components';
 import {injectable, inject, singleton} from "tsyringe";
 import { Entity } from '../entity';
 import { EntityIndex } from '../entity-index';
+import { Prototype } from 'src/prototype';
 
 export const ENTITY_OPTIONS = 'entity_options';
 
@@ -15,19 +16,28 @@ export class EntityManager {
   entities = new Map<number, Entity>();
   tags = new Map<string, Set<Entity>>();
   indices = new Map<string, EntityIndex<any, any>>();
+  commandBuffer: (()=>void)[] = [];
 
   constructor(@inject(ENTITY_OPTIONS) options: EntityRepoOptions){
     for (const entity of options.entities || []) {
       this.addEntity(entity);
     }
+    this.update();
+  }
+
+  createEntity(prototypeId: string, data: any){
+    const entity = Prototypes[prototypeId]
+      .createEntity(data);
+
+    this.addEntity(entity);
   }
 
   addEntity(entity: Entity){
-    this.entities.set(entity.id, entity);
+    this.commandBuffer.push(() => this.entities.set(entity.id, entity));
   }
 
   removeEntity(entity: Entity){
-    this.entities.delete(entity.id);
+    this.commandBuffer.push(() => this.entities.delete(entity.id));
   }
 
   getById(id: number){
@@ -53,6 +63,11 @@ export class EntityManager {
   }
 
   update(){
+    for (const command of this.commandBuffer) {
+      command();
+    }
+    this.commandBuffer = [];
+
     for (const index of this.indices.values()) {
       index.clear();  
       for (const entity of this.entities.values()) {
